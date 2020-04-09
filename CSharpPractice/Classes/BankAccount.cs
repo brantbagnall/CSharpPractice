@@ -19,19 +19,51 @@ namespace CSharpPractice.Classes
                 }
                 return 1000000;
             }
-            set
+            protected set //only accessible in this class and any class that inherits functionality (protected is less private than the private modifier) (private means only this class)
             {
                 if (value > 0)
                 {
                     balance = value;
                 }
-                balance = 0;
+                else
+                {
+                    balance = 0;
+                }
             }
         }
-        public double AddToBalance(double balanceToBeAdded)
+
+        public BankAccount() //Constructor
+        {
+            Balance = 100;
+        }
+        public BankAccount( double initialBalance) //overload constructor
+        {
+            Balance = initialBalance;
+        }
+
+        public virtual double AddToBalance(double balanceToBeAdded) //virtual marks method as overridable
         {
             Balance += balanceToBeAdded;
             return Balance;
+        }
+    }
+    public class ChildBankAccount : BankAccount //ChildBankAccount class inherets all functionality from the BankAccount class
+    {
+        public ChildBankAccount()
+        {
+            Balance = 10;
+        }
+        public override double AddToBalance(double balanceToBeAdded) //have to write override to actually override
+        {
+            if (balanceToBeAdded > 1000)
+            {
+                balanceToBeAdded = 1000;
+            }
+            if (balanceToBeAdded < -1000)
+            {
+                balanceToBeAdded = -1000;
+            }
+            return base.AddToBalance(balanceToBeAdded);
         }
     }
 }
