@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CSharpPractice.Interfaces
 {
-    interface Interface1
+    interface IInformation
     {
+        string GetInformation(); // define method
     }
 }
